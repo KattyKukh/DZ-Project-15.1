@@ -14,17 +14,17 @@ public class TicketManagerTest {
 
     Ticket ticket1 = new Ticket(1, 11000, "LED", "DME", 95);
     Ticket ticket2 = new Ticket(2, 20000, "LED", "AAQ", 295);
-    Ticket ticket3 = new Ticket(3, 25000, "LED", "AER", 295);
+    Ticket ticket3 = new Ticket(3, 25000, "LED", "PES", 195);
     Ticket ticket4 = new Ticket(4, 18000, "LED", "MCX", 235);
     Ticket ticket5 = new Ticket(5, 50000, "LED", "VVO", 975);
     Ticket ticket6 = new Ticket(6, 21000, "LED", "KHV", 480);
     Ticket ticket7 = new Ticket(7, 36000, "LED", "MVR", 325);
     Ticket ticket8 = new Ticket(8, 16000, "LED", "PES", 185);
-    Ticket ticket9 = new Ticket(9, 10000, "LED", "DME", 89);
-    Ticket ticket10 = new Ticket(10, 35000, "LED", "VVO", 975);
+    Ticket ticket9 = new Ticket(9, 9000, "LED", "DME", 89);
+    Ticket ticket10 = new Ticket(10, 50000, "LED", "VVO", 975);
     Ticket ticket11 = new Ticket(11, 45000, "LED", "AER", 295);
     Ticket ticket12 = new Ticket(12, 52000, "LED", "KHV", 480);
-    Ticket ticket13 = new Ticket(13, 23000, "LED", "VVO", 880);
+    Ticket ticket13 = new Ticket(13, 50000, "LED", "VVO", 880);
     Ticket ticket14 = new Ticket(14, 25000, "LED", "MVR", 235);
     Ticket ticket15 = new Ticket(15, 10000, "LED", "PES", 280);
     Ticket ticket16 = new Ticket(16, 27000, "LED", "MCX", 200);
@@ -58,16 +58,30 @@ public class TicketManagerTest {
     }
 
     @Test
-    public void shouldFindTicketsAndSortByPrice() {
-        Ticket[] expected = {ticket20, ticket9, ticket1};
+    public void shouldFindTicketsAndSortByIncludedEqualsPriceAndTravelTime() {
+        Ticket[] expected = {ticket9, ticket20, ticket1};
         Ticket[] actual = manager.findAll("LED", "DME");
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindTicketsAndNotSortByPriceIfPricesIsEquals() {
+    public void shouldFindTicketsAndSortByPriceAndTravelTime() {
+        Ticket[] expected = {ticket15, ticket8, ticket18, ticket3};
+        Ticket[] actual = manager.findAll("LED", "PES");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindTicketsAndNotSortByPriceIfPricesAndTravelTimeIsEquals() {
         Ticket[] expected = {ticket2, ticket17};
         Ticket[] actual = manager.findAll("LED", "AAQ");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindTicketsAndSortByTravelTimeIfPricesIsEquals() {
+        Ticket[] expected = {ticket13, ticket5, ticket10};
+        Ticket[] actual = manager.findAll("LED", "VVO");
         assertArrayEquals(expected, actual);
     }
 

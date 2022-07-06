@@ -23,7 +23,9 @@ public class TicketManager {
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
-                Arrays.sort(result);
+                TicketByPriceComparator priceComparator = new TicketByPriceComparator();
+                TicketByTravelTimeComparator travelTimeComparator = new TicketByTravelTimeComparator();
+                Arrays.sort(result, priceComparator.thenComparing(travelTimeComparator));
 
             }
         }
