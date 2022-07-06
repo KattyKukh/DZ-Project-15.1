@@ -35,4 +35,5 @@ public class Ticket {
     public int getTravelTime() {
         return travelTime;
     }
+
 }

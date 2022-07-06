@@ -15,7 +15,7 @@ public class TicketManager {
         repo.save(ticket);
     }
 
-    public Ticket[] findAll(String departureAirport, String arrivalAirport) {
+    public Ticket[] findAll(String departureAirport, String arrivalAirport, TicketComparator ticketComparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repo.getTickets()) {
             if ((ticket.getDepartureAirport() == departureAirport) & (ticket.getArrivalAirport() == arrivalAirport)) {
@@ -23,9 +23,8 @@ public class TicketManager {
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
-                TicketByPriceComparator priceComparator = new TicketByPriceComparator();
-                TicketByTravelTimeComparator travelTimeComparator = new TicketByTravelTimeComparator();
-                Arrays.sort(result, priceComparator.thenComparing(travelTimeComparator));
+
+                Arrays.sort(result, ticketComparator);
 
             }
         }
