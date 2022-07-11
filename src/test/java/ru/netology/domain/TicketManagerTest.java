@@ -21,7 +21,7 @@ public class TicketManagerTest {
     Ticket ticket7 = new Ticket(7, 36000, "LED", "MVR", 325);
     Ticket ticket8 = new Ticket(8, 16000, "LED", "PES", 185);
     Ticket ticket9 = new Ticket(9, 10000, "LED", "DME", 89);
-    Ticket ticket10 = new Ticket(10, 35000, "LED", "VVO", 975);
+    Ticket ticket10 = new Ticket(10, 15000, "LED", "VVO", 975);
     Ticket ticket11 = new Ticket(11, 45000, "LED", "AER", 295);
     Ticket ticket12 = new Ticket(12, 52000, "LED", "KHV", 480);
     Ticket ticket13 = new Ticket(13, 23000, "LED", "VVO", 880);
@@ -61,6 +61,13 @@ public class TicketManagerTest {
     public void shouldFindTicketsAndSortByPrice() {
         Ticket[] expected = {ticket20, ticket9, ticket1};
         Ticket[] actual = manager.findAll("LED", "DME");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindTicketsAndSortByIncreasePrice() {
+        Ticket[] expected = {ticket10, ticket13, ticket5};
+        Ticket[] actual = manager.findAll("LED", "VVO");
         assertArrayEquals(expected, actual);
     }
 
